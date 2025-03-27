@@ -64,5 +64,6 @@ SELECT z.zip_code, c.city_name, s.state_name
 	FROM zip_codes z
 	JOIN cities c ON z.city_id = c.city_id
 	JOIN states s ON z.state_id = s.state_id
-	ORDER BY s.state_name , c.city_name
+    WHERE z.zip_code = 226001
+	ORDER BY s.state_name , c.city_name	
 ;
