@@ -4,10 +4,12 @@
 -- function.
 DROP PROCEDURE AverageSalesOfProduct;
 
+select * from order_items;
+
 DELIMITER $$
 CREATE PROCEDURE AverageSalesOfProduct (orderMonth INT, orderYear INT)
 BEGIN
-	SELECT oi.product_id, SUM(oi.price) AS total_sales_in_price, SUM(oi.quantity) AS total_sales_in_quantity, SUM(oi.price)/SUM(oi.quantity) AS average_sales
+	SELECT oi.product_id, SUM(oi.price*oi.quantity) AS total_sales_in_price, SUM(oi.quantity) AS total_sales_in_quantity, SUM(oi.price*oi.quantity)/SUM(oi.quantity) AS average_sales
 	FROM order_items oi
 	JOIN orders o ON oi.order_id = o.order_id
 	WHERE  MONTH(o.timestamp) = orderMonth AND YEAR(o.timestamp) = orderYear
